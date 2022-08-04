@@ -3,6 +3,7 @@
 
 int main(){
     RLvcpu vcpu;
-    printf("Hello, world!\n");
+    RLcode c;
+    printf("Hello, world!Size of RLcode:%ld\n", sizeof(c));
     return 0;
 }

@@ -3,13 +3,7 @@
 
 RLresult rlRead(RLinstance * instance, RLcode code){
     RLubyte opcode;
-    RLubyte rd;
-    RLubyte rs1;
-    RLubyte rs2;
-    RLuint imm1;
-    RLuint imm2;
-    
-    opcode = code[0]&RL_BIN(111111);
+    opcode = code.opcode;
     switch(opcode){
     }
     return RL_SUCCESS;

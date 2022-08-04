@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 typedef uint8_t RLubyte;
+typedef uint16_t RLushort;
 typedef uint32_t RLuint;
 typedef uint64_t RLulong;
 
