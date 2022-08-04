@@ -5,60 +5,46 @@
 typedef struct{
     RLint R[32];
     RLfloat F[32];
+    RLuint P;
+    RLuint T;
 }RLvcpu;
 
 #pragma pack(1)
 
 typedef struct{
-    RLubyte rd;
-    RLubyte funct3;
-    RLubyte rs1;
-    RLubyte rs2;
-    RLubyte funct7;
-    RLubyte w[2];
-}RLrtype;
+    RLubyte op;
+    RLubyte src;
+    RLuint dest;
+}RLmtype;
 
 typedef struct{
-    RLubyte rd;
-    RLubyte funct3;
-    RLubyte rs1;
-    RLushort imm;
-    RLubyte w[2];
+    RLint imm;
+    RLubyte dest;
 }RLitype;
 
 typedef struct{
-    RLubyte imm1;
-    RLubyte funct3;
-    RLubyte rs1;
-    RLubyte rs2;
-    RLubyte imm2;
-    RLubyte w[2];
-}RLbstype;
+    RLfloat imm;
+    RLubyte dest;
+}RLftype;
 
 typedef struct{
-    RLubyte rd;
-    RLuint imm;
-    RLubyte w[2];
-}RLutype;
+    RLubyte op;
+    RLubyte byte;
+    RLubyte src;
+    RLubyte dest;
+}RLrtype;
 
-typedef struct{
-    RLubyte rd;
-    RLubyte imm1;
-    RLubyte imm2;
-    RLubyte imm3;
-    RLubyte imm4;
-    RLubyte w[2];
-}RLjtype;
+typedef union{
+    RLmtype m;
+    RLrtype r;
+    RLitype i;
+    RLftype f;
+}RLctype;
 
 typedef struct{
     RLubyte opcode;
-    union{
-        RLrtype r;
-        RLitype i;
-        RLbstype bs;
-        RLutype u;
-        RLjtype j;
-    }number;
+    RLctype number;
+    RLubyte w[8-sizeof(RLubyte)-sizeof(RLctype)];
 }RLcode;
 
 #pragma pack()
