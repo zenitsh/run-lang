@@ -4,4 +4,4 @@ project(run-lang)
 
 include_directories(include)
 
-add_subdirectory(rnvm runc)
+subdirs(rnvm runc)

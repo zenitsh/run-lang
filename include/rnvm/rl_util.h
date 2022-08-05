@@ -14,6 +14,8 @@ typedef float RLfloat;
 #define RL_FAILURE 1
 typedef uint8_t RLresult;
 
+typedef uint8_t RLbool;
+
 #define RL_BIN(bin) 0b##bin
 
 #endif

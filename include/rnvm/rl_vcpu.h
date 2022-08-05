@@ -5,14 +5,16 @@
 typedef struct{
     RLint R[32];
     RLfloat F[32];
+    RLuint C;
     RLuint P;
-    RLuint T;
+    RLuint B;
 }RLvcpu;
 
 #pragma pack(1)
 
 typedef struct{
     RLubyte op;
+    RLubyte op2;
     RLubyte src;
     RLuint dest;
 }RLmtype;
@@ -20,31 +22,43 @@ typedef struct{
 typedef struct{
     RLint imm;
     RLubyte dest;
+    RLubyte w[2];
 }RLitype;
 
 typedef struct{
     RLfloat imm;
     RLubyte dest;
+    RLubyte w[2];
 }RLftype;
 
 typedef struct{
     RLubyte op;
-    RLubyte byte;
-    RLubyte src;
+    RLubyte op2;
+    RLubyte src1;
+    RLubyte src2;
     RLubyte dest;
+    RLubyte w[2];
 }RLrtype;
+
+
+typedef union{
+    RLubyte p;//push pointer?
+    RLubyte c;
+    RLuint j;
+    RLubyte w[1];
+}RLjtype;
 
 typedef union{
     RLmtype m;
     RLrtype r;
     RLitype i;
     RLftype f;
+    RLjtype j;
 }RLctype;
 
 typedef struct{
     RLubyte opcode;
     RLctype number;
-    RLubyte w[8-sizeof(RLubyte)-sizeof(RLctype)];
 }RLcode;
 
 #pragma pack()
