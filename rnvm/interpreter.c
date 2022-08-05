@@ -3,6 +3,42 @@
 #include <malloc.h>
 #include <string.h>
 
+#define printf(args...)
+
+#define RL_IN_INTERPRET_ZERO_PARAM(p, f) \
+    if(rlStrcmpp(_tok[i], &j, #p)){ \
+        printf(#p " \n"); \
+        rl##f(instance); \
+        ++instance->cpu.C; \
+    }
+
+#define RL_IN_INTERPRET_ONE_PARAM(p, f) \
+    if(rlStrcmpp(_tok[i], &j, #p)){ \
+        int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        printf(#p " %d\n", a1); \
+        rl##f(instance, a1); \
+        ++instance->cpu.C; \
+    }
+
+#define RL_IN_INTERPRET_TWO_PARAMS(p, f) \
+    if(rlStrcmpp(_tok[i], &j, #p)){ \
+        int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        printf(#p " %d %d\n", a1, a2); \
+        rl##f(instance, a1, a2); \
+        ++instance->cpu.C; \
+    }
+
+#define RL_IN_INTERPRET_THREE_PARAMS(p, f) \
+    if(rlStrcmpp(_tok[i], &j, #p)){ \
+        int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        int a3 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j); \
+        printf(#p " %d %d %d\n", a1, a2, a3); \
+        rl##f(instance, a1, a2, a3); \
+        ++instance->cpu.C; \
+    }
+
 RLint rlAtoip(char * str, RLuint * index){
     RLint i = 0;
     while(str[*index]<='9'&&str[*index]>='0'){
@@ -68,44 +104,39 @@ void rlInterpret(RLinstance *instance, const char * code){
     for(instance->cpu.C=0;instance->cpu.C<_tok_count;){
         RLuint j=0;
         RLuint i=instance->cpu.C;
-        if(rlStrcmpp(_tok[i], &j, "setiim")){
-            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
-            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);            
-            printf("settim %d %d\n", a1, a2);
-            rlSetiim(instance, a1, a2);
-            ++instance->cpu.C;
-        }else if(rlStrcmpp(_tok[i], &j, "setfim")){
-            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
-            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);            
-            printf("setfim %d %d\n", a1, a2);
-            //rlSetiim(instance, a1, a2);
-            ++instance->cpu.C;
-        }else if(rlStrcmpp(_tok[i], &j, "seti")){
-            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
-            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);            
-            printf("seti %d %d\n", a1, a2);
-            rlSeti(instance, a1, a2);
-            ++instance->cpu.C;
-        }else if(rlStrcmpp(_tok[i], &j, "addi")){
-            
-        }else if(rlStrcmpp(_tok[i], &j, "jumpim")){
+        RL_IN_INTERPRET_TWO_PARAMS(setiim, Setiim)
+        else RL_IN_INTERPRET_TWO_PARAMS(setfim, Setfim)
+        else RL_IN_INTERPRET_TWO_PARAMS(seti, Seti)
+        else RL_IN_INTERPRET_TWO_PARAMS(setmii, Setmii)
+        else RL_IN_INTERPRET_TWO_PARAMS(getmii, Getmii)
+        else RL_IN_INTERPRET_TWO_PARAMS(setmfi, Setmfi)
+        else RL_IN_INTERPRET_TWO_PARAMS(getmfi, Getmfi)
+        else RL_IN_INTERPRET_THREE_PARAMS(addi, Addi)
+        else RL_IN_INTERPRET_THREE_PARAMS(subi, Subi)
+        else RL_IN_INTERPRET_TWO_PARAMS(sysi, Sysi)
+        else RL_IN_INTERPRET_ZERO_PARAM(retn, Retn)
+        else RL_IN_INTERPRET_ONE_PARAM(addsim, Addsim)
+        else RL_IN_INTERPRET_ONE_PARAM(subsim, Subsim)
+        else RL_IN_INTERPRET_ONE_PARAM(getsi, Getsi)
+        else RL_IN_INTERPRET_ONE_PARAM(getbi, Getbi)
+        else if(rlStrcmpp(_tok[i], &j, "jumpim")){
             int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
             printf("jumpim %d\n", a1);
             rlJumpim(instance, a1);
+        }else if(rlStrcmpp(_tok[i], &j, "jziim")){
+            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
+            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
+            printf("jziim %d %d\n", a1, a2);
+            rlJziim(instance, a1, a2);
+        }else if(rlStrcmpp(_tok[i], &j, "jaiim")){
+            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
+            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
+            printf("jaiim %d %d\n", a1, a2);
+            rlJaiim(instance, a1, a2);
         }else if(rlStrcmpp(_tok[i], &j, "xim")){
             int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
             printf("xim %d\n", a1);
             rlXim(instance, a1); 
-        }else if(rlStrcmpp(_tok[i], &j, "retn")){
-            printf("retn\n");
-            ++instance->cpu.C;
-            rlRetn(instance);
-        }else if(rlStrcmpp(_tok[i], &j, "sysi")){
-            int a1 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);
-            int a2 = rlScanp(_label, _label_pos, _label_count, _tok[i], &j);           
-            printf("sysi %d\n", a1);
-            rlSysi(instance, a1, a2);
-            ++instance->cpu.C;
         }
     }
     free(_code);

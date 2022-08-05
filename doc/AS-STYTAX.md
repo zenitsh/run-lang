@@ -58,9 +58,9 @@ riim <r1> <imm> <r3>
 jumpi <r>
 jumpim <imm>
 jzii <r1> <r2>
-jnzii <r1> <r2>
+jaii <r1> <r2>
 jziim <r> <imm>
-jnziim <r> <imm>
+jaiim <r> <imm>
 xi <r>
 xim <imm> ; ATTENTION: P, B, C are all changed;
 ; P, B, C are locked: They cannot be changed together execpt xi/xim & retn
