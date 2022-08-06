@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "rnvm.h"
+#include "rnvm/rnvm.h"
 
 int main(){
     RLinstance *instance = rlCreateInstance(4096);
@@ -42,9 +42,9 @@ int main(){
             "retn\n"//RETURN
     "start:\n"
         "sysi 0 3\n"// IN -> R0
-        "xim F\n"
-        "sysi 0 1\n"
-        "sysi 0 0\n";//EXECUTE F
+        "xim F\n"//EXECUTE F
+        "sysi 0 1\n"//SYSTEM 1 R0
+        "sysi 0 0\n";//SYSTEM 0 R0
 
     rlInterpret(instance, code);
 

@@ -4,6 +4,11 @@ getmi <memory> <r>
 setmf <memory> <f>
 getmf <memory> <f>
 
+setioi <io> <r>
+getioi <io> <r>
+setiof <io> <f>
+getiof <io> <f>
+
 setiim <imm> <r>
 setfim <imm> <f>
 
@@ -14,6 +19,7 @@ setif <f> <r>
 setfi <r> <f>
 addsi <r>
 addsim <imm>
+subsum <imm>
 getsi <r>
 getsf <f>
 setsi <r>

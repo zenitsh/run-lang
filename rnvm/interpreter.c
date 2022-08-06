@@ -1,4 +1,4 @@
-#include "rnvm.h"
+#include "rnvm/rnvm.h"
 #include "rnvm/rl_util.h"
 #include <malloc.h>
 #include <string.h>
@@ -113,6 +113,13 @@ void rlInterpret(RLinstance *instance, const char * code){
         else RL_IN_INTERPRET_TWO_PARAMS(getmfi, Getmfi)
         else RL_IN_INTERPRET_THREE_PARAMS(addi, Addi)
         else RL_IN_INTERPRET_THREE_PARAMS(subi, Subi)
+        else RL_IN_INTERPRET_THREE_PARAMS(muli, Muli)
+        else RL_IN_INTERPRET_THREE_PARAMS(divi, Divi)
+        else RL_IN_INTERPRET_THREE_PARAMS(remi, Remi)
+        else RL_IN_INTERPRET_THREE_PARAMS(addf, Addi)
+        else RL_IN_INTERPRET_THREE_PARAMS(subf, Subi)
+        else RL_IN_INTERPRET_THREE_PARAMS(mulf, Muli)
+        else RL_IN_INTERPRET_THREE_PARAMS(divf, Divi)
         else RL_IN_INTERPRET_TWO_PARAMS(sysi, Sysi)
         else RL_IN_INTERPRET_ZERO_PARAM(retn, Retn)
         else RL_IN_INTERPRET_ONE_PARAM(addsim, Addsim)

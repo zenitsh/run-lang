@@ -1,4 +1,4 @@
-#include "rnvm.h"
+#include "rnvm/rnvm.h"
 #include "rnvm/rl_instance.h"
 #include "rnvm/rl_util.h"
 #include <malloc.h>

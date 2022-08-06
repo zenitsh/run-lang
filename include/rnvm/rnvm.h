@@ -14,6 +14,11 @@ void rlGetmii(RLinstance * instance, RLubyte r1, RLubyte r2);
 void rlSetmfi(RLinstance * instance, RLubyte r1, RLubyte r2);
 void rlGetmfi(RLinstance * instance, RLubyte r1, RLubyte r2);
 
+void rlSetioi(RLinstance * instance, RLubyte r1, RLubyte r2);
+void rlGetioi(RLinstance * instance, RLubyte r1, RLubyte r2);
+void rlSetiof(RLinstance * instance, RLubyte r1, RLubyte r2);
+void rlGetiof(RLinstance * instance, RLubyte r1, RLubyte r2);
+
 void rlSetiim(RLinstance * instance, RLint imm, RLubyte r);
 void rlSetfim(RLinstance * instance, RLfloat imm, RLubyte r);
 
@@ -34,13 +39,13 @@ void rlGetbi(RLinstance * instance, RLubyte r);
 
 void rlAddi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
 void rlSubi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
-//rlMuli
-//rlDivi
-//rlRemi
-//rlAddf
-//rlSubf
-//rlMulf
-//rlDivf
+void rlMuli(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlDivi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlRemi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlAddf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlSubf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlMulf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
+void rlDivf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3);
 
 //rlJumpi
 void rlJumpim(RLinstance * instance, RLuint imm);

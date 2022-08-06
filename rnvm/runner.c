@@ -2,7 +2,7 @@
 #include "rnvm/rl_instance.h"
 
 #include <string.h>
-#include <stdio.h>
+//#include <stdio.h>
 
 void rlSetmi(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->mem[mem], &instance->cpu.R[r], sizeof(RLint));}
 void rlGetmi(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->cpu.R[r], &instance->mem[mem], sizeof(RLint));}
@@ -34,13 +34,14 @@ void rlGetbi(RLinstance * instance, RLubyte r){instance->cpu.R[r]=instance->cpu.
 
 void rlAddi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.R[r3]=instance->cpu.R[r1]+instance->cpu.R[r2];}
 void rlSubi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.R[r3]=instance->cpu.R[r1]-instance->cpu.R[r2];}
-//rlMuli
-//rlDivi
-//rlRemi
-//rlAddf
-//rlSubf
-//rlMulf
-//rlDivf
+void rlMuli(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.R[r3]=instance->cpu.R[r1]*instance->cpu.R[r2];}
+void rlDivi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.R[r3]=instance->cpu.R[r1]/instance->cpu.R[r2];}
+void rlRemi(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.R[r3]=instance->cpu.R[r1]%instance->cpu.R[r2];}
+void rlAddf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.F[r3]=instance->cpu.F[r1]+instance->cpu.F[r2];}
+void rlSubf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.F[r3]=instance->cpu.F[r1]-instance->cpu.F[r2];}
+void rlMulf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.F[r3]=instance->cpu.F[r1]*instance->cpu.F[r2];}
+void rlDivf(RLinstance * instance, RLubyte r1, RLubyte r2, RLubyte r3){instance->cpu.F[r3]=instance->cpu.F[r1]/instance->cpu.F[r2];}
+
 
 //rlJumpi
 void rlJumpim(RLinstance * instance, RLuint imm){instance->cpu.C=imm;}
@@ -63,21 +64,4 @@ void rlRetn(RLinstance * instance){
     memcpy(&instance->cpu.C, &instance->mem[instance->cpu.P], sizeof(RLuint));
     memcpy(&instance->cpu.B, &instance->mem[instance->cpu.P+sizeof(RLuint)], sizeof(RLuint));
     //for(int i=0;i<instance->cpu.P;i+=sizeof(RLint))printf("%d|", *(RLint*)&instance->mem[i]);printf("\n");
-}
-
-void rlSysi(RLinstance * instance, RLubyte r, RLint imm){
-    switch(imm){
-        case 0x00:
-        printf("\n");
-        break;
-        case 0x01:
-        printf("%d", instance->cpu.R[r]);
-        break;
-        case 0x02:
-        printf("%f", instance->cpu.F[r]);
-        break;
-        case 0x03:
-        scanf("%d", &instance->cpu.R[r]);
-        break;
-    }
 }
