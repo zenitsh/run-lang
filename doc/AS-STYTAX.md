@@ -1,12 +1,12 @@
 ``` 
-setmi <memory> <r>
+setmi <r> <memory>
 getmi <memory> <r>
-setmf <memory> <f>
+setmf <f> <memory>
 getmf <memory> <f>
 
-setioi <io> <r>
+setioi <r> <io>
 getioi <io> <r>
-setiof <io> <f>
+setiof <f> <io>
 getiof <io> <f>
 
 setiim <imm> <r>
@@ -24,8 +24,8 @@ getsi <r>
 getsf <f>
 setsi <r>
 setsf <f>
-swapi <r1> <r2>
-swapf <r1> <r2>
+#swapi <r1> <r2>
+#swapf <r1> <r2>
 
 addi <r1> <r2> <r3> ; r1 + r2 -> r3
 subi <r1> <r2> <r3>

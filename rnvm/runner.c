@@ -5,14 +5,14 @@
 //#include <stdio.h>
 
 void rlSetmi(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->mem[mem], &instance->cpu.R[r], sizeof(RLint));}
-void rlGetmi(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->cpu.R[r], &instance->mem[mem], sizeof(RLint));}
+void rlGetmi(RLinstance * instance, RLuint mem, RLubyte r){memcpy(&instance->cpu.R[r], &instance->mem[mem], sizeof(RLint));}
 void rlSetmf(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->mem[mem], &instance->cpu.F[r], sizeof(RLfloat));}
-void rlGetmf(RLinstance * instance, RLubyte r, RLuint mem){memcpy(&instance->cpu.F[r], &instance->mem[mem], sizeof(RLfloat));}
+void rlGetmf(RLinstance * instance, RLuint mem, RLubyte r){memcpy(&instance->cpu.F[r], &instance->mem[mem], sizeof(RLfloat));}
 
 void rlSetmii(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->mem[instance->cpu.R[r2]], &instance->cpu.R[r1], sizeof(RLint));}
-void rlGetmii(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->cpu.R[r1], &instance->mem[instance->cpu.R[r2]], sizeof(RLint));}
+void rlGetmii(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->cpu.R[r2], &instance->mem[instance->cpu.R[r1]], sizeof(RLint));}
 void rlSetmfi(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->mem[instance->cpu.R[r2]], &instance->cpu.F[r1], sizeof(RLfloat));}
-void rlGetmfi(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->cpu.F[r1], &instance->mem[instance->cpu.R[r2]], sizeof(RLfloat));}
+void rlGetmfi(RLinstance * instance, RLubyte r1, RLubyte r2){memcpy(&instance->cpu.F[r2], &instance->mem[instance->cpu.R[r1]], sizeof(RLfloat));}
 
 void rlSetiim(RLinstance * instance, RLint imm, RLubyte r){instance->cpu.R[r]=imm;}
 void rlSetfim(RLinstance * instance, RLfloat imm, RLubyte r){instance->cpu.F[r]=imm;}

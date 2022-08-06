@@ -1,15 +1,11 @@
 
 #语法
 
+##参见GRAMMAR.md
+
 ##例子
 ```
-def:
-    in(x)
-    'hello,{}', x -> format 
-        -> print $
-as foo
-def: $ -> foo as foo1
-$ -> foo # =foo
+{|'Hello, world!\n' -> print} -> foo,foo
 ```
 这是一个没有数据类型的编程语言,默认所有全是32位整数.
 
@@ -27,21 +23,6 @@ $ -> foo # =foo
 
 这里foo类型为constant(function pointer)
 
-```
-def:
-    out(x=0)
-    run
-as foo
-def:
-    foo -> temp(f) #f为实例化的foo对象,但是在栈上,通过run不释放内存返回
-    f.x -> print
-    1 -> f.x
-    f.x -> print
-    #释放空间
-as test
-test
-```
-
 孤立函数(区别于栈上函数):
 ```
 foo -> alloc(f)
@@ -49,10 +30,10 @@ int -> alloc(i)
 ```
 父函数执行完后不会释放局部变量空间
 
-##表达式宏
+##运算符表达式
 
 **强制不使用连运算符,必须使用括号**
 
 ```
-#a + (b * c) -> print
+#(a + (b * c)) -> print
 ```
